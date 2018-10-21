@@ -9,7 +9,7 @@ A POC for a smart contract that incentivizes EVM implementations of BLAKE2b per 
 
 Note: this hasn't been tested or deployed, and is still in a working state.
 
-## Solidity interface
+## Solidity Interface
 ```solidity
 interface BLAKE2bCaller {
     function blake2b(bytes input, bytes key, uint64 outlen) external pure returns (uint64[8]);

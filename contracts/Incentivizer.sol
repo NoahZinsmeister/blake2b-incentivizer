@@ -58,8 +58,9 @@ contract Incentivizer is BLAKE2b {
     function payout(address winningAddress, uint gasConsumed) private {
         if (gasConsumed < currentGasRecord) {
             // TODO implement log-based payouts
-            winningAddress.transfer(payoutPerWinner + (currentGasRecord - gasConsumed) * payoutPerGas);
-            emit NewRecord(winningAddress, currentGasRecord, gasConsumed);
+            uint amount = payoutPerWinner + (currentGasRecord - gasConsumed) * payoutPerGas;
+            winningAddress.transfer(amount);
+            emit NewRecord(winningAddress, amount, currentGasRecord, gasConsumed);
             currentGasRecord = gasConsumed;
         }
     }
@@ -75,6 +76,6 @@ contract Incentivizer is BLAKE2b {
     }
 
     event ContractFunded(uint amountInWei, uint newBalanceInWei);
-    event CommitmentMade(address winner, uint testBlock);
-    event NewRecord(address winner, uint oldGasRecord, uint newGasRecord);
+    event CommitmentMade(address _address, uint testBlock);
+    event NewRecord(address winner, uint rewardInWei, uint oldGasRecord, uint newGasRecord);
 }
